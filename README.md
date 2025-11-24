@@ -86,7 +86,7 @@ Siga os passos abaixo para configurar e executar a aplicação contida neste rep
 git clone https://github.com/ribeiro-julia/Trabalho-Pratico-Sistemas-Distribuidos
 cd Trabalho-Pratico-Sistemas-Distribuidos
 
-# 3. Ajuste as variáveis de ambiente
+# 3. Ajuste as variáveis de ambiente em example.env
 
 GEMINI_API_KEY="YOUR_GEMINI_API_KEY_HERE"
 CLOUDINARY_CLOUD_NAME="YOUR_CLOUDINARY_CLOUD_NAME_HERE"
