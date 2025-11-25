@@ -1,44 +1,55 @@
 from mcp.server.fastmcp import FastMCP
-from dotenv import load_dotenv
-import google.genai as genai
 import os
-from utils import *
+import time
+from pathlib import Path
 
-mcp = FastMCP("Image generator")
+mcp = FastMCP("Filesystem")
 
-load_dotenv()
-api_key = os.getenv("GEMINI_API_KEY")
-client = genai.Client(api_key=api_key)
-
-IMAGE_MODEL = "gemini-2.5-flash-image"
+BASE_DIR = Path(__file__).resolve().parent.parent
+STORAGE_DIR = BASE_DIR / "storage" / "docs"
+STORAGE_DIR.mkdir(parents=True, exist_ok=True)
 
 @mcp.tool()
-async def create_image(input: str) -> str:
+async def list_files() -> dict:
     """
-    Create image
+    List local files
     
     """
-    try:
-        response = client.models.generate_content(
-            model=IMAGE_MODEL,
-            contents=input
-        )
+    files = []
+    for name in os.listdir(STORAGE_DIR):
+        path = os.path.join(STORAGE_DIR, name)
+        if os.path.isfile(path):
+            stat = os.stat(path)
+            files.append({
+                "name": name,
+                "size": stat.st_size,
+                "modified": time.ctime(stat.st_mtime)
+            })
+    return {"files": files}
 
-        for part in getattr(response, "parts", []):
-            inline_data = getattr(part, "inline_data", None)
-            if inline_data and getattr(inline_data, "data", None):
-                img = inline_data.data
+@mcp.tool()
+async def read_file(name: str, offset: int = 0, length: int = 2048) -> dict:
+    """
+    Read files locally
+    
+    """  
+    safe = os.path.basename(name)
+    path = os.path.join(STORAGE_DIR, safe)
 
-                file_path = save_image_locally(img)
+    if not os.path.exists(path):
+        return {"error": "file not found"}
 
-                image_url = create_img_url(file_path)
-                
-                return image_url
+    with open(path, "rb") as f:
+        f.seek(offset)
+        data = f.read(length)
 
-    except Exception as e:
-        print(f"Erro ao gerar imagem: {e}")
+    return {
+        "name": safe,
+        "offset": offset,
+        "length": len(data),
+        "content_b64": data.decode("latin1")
+    }
 
-    return None
-
+    
 if __name__ == "__main__":
     mcp.run()
