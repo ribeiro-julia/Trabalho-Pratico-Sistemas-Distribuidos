@@ -17,7 +17,7 @@ A solução é composta por múltiplos componentes distribuídos que trabalham j
 - **Serviço de Renderização de Imagens**: API externa (ex: Cloudinary) usada para geração e manipulação de imagens.  
 - **Orquestração / Infraestrutura**: Docker e Docker Compose para execução dos serviços em contêineres isolados.
 
-## Tabela 1 — Tecnologias e Componentes
+## Tecnologias e Componentes
 
 | Componente | Tecnologia / Framework | Responsabilidade |
 |-----------|------------------------|------------------|
