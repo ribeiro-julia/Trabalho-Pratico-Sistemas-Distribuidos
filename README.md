@@ -65,11 +65,11 @@ O projeto terá a seguinte estrutura:
 
 Toda a análise arquitetônica, modelagem de ameaças e estratégias de mitigação do sistema estão detalhadas nos seguintes documentos:
 
-1.  Visão Arquitetônica Inicial: Descreve a arquitetura funcional do sistema antes da análise de segurança.
+1.  [Visão Arquitetônica Inicial](https://github.com/ribeiro-julia/Trabalho-Pratico-Sistemas-Distribuidos/blob/main/documentacao_arquitetonica/visao_inicial.md): Descreve a arquitetura funcional do sistema antes da análise de segurança.
     
-2.  Modelagem de Ameaças: Apresenta a análise de riscos e ameaças utilizando.
+2.  [Modelagem de Ameaças](https://github.com/ribeiro-julia/Trabalho-Pratico-Sistemas-Distribuidos/blob/main/documentacao_arquitetonica/modelagem_ameacas.md): Apresenta a análise de riscos e ameaças utilizando.
     
-3.  Visão Arquitetônica Final e Mitigações: Detalha a arquitetura aprimorada com os controles de segurança implementados.
+3.  [Visão Arquitetônica Final e Mitigações](https://github.com/ribeiro-julia/Trabalho-Pratico-Sistemas-Distribuidos/blob/main/documentacao_arquitetonica/visao_final.md): Detalha a arquitetura aprimorada com os controles de segurança implementados.
     
 
 ## RODANDO O PROJETO:
