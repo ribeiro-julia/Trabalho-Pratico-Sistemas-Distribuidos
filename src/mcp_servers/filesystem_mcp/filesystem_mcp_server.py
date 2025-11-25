@@ -27,6 +27,28 @@ async def list_files() -> dict:
             })
     return {"files": files}
 
+@mcp.tool()
+async def read_file(name: str, offset: int = 0, length: int = 2048) -> dict:
+    """
+    Read files locally
+    
+    """  
+    safe = os.path.basename(name)
+    path = os.path.join(STORAGE_DIR, safe)
+
+    if not os.path.exists(path):
+        return {"error": "file not found"}
+
+    with open(path, "rb") as f:
+        f.seek(offset)
+        data = f.read(length)
+
+    return {
+        "name": safe,
+        "offset": offset,
+        "length": len(data),
+        "content_b64": data.decode("latin1")
+    }
 
 if __name__ == "__main__":
     mcp.run()
